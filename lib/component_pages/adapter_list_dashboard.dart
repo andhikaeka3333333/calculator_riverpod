@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../colors.dart';
+import '../widgets/colors.dart';
 import '../model/model_dashboard.dart';
 import '../widgets/item_dashboard.dart';
 

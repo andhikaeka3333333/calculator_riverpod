@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../widgets/calculate_button.dart';
+import '../widgets/main_button.dart';
 import '../widgets/custom_input.dart';
 
 
@@ -66,7 +66,7 @@ class _KelilingBangunDatarState extends State<KelilingBangunDatar> {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      CalculateButton(
+                      MainButton(
                         icon: Icon(Icons.rectangle),
                         textButton: "Hitung Keliling Persegi Panjang",
                         backgroundColor: Colors.blueAccent,
@@ -83,6 +83,10 @@ class _KelilingBangunDatarState extends State<KelilingBangunDatar> {
                           } else {
                             final panjang = double.tryParse(panjangController.text) ?? 0;
                             final lebar = double.tryParse(lebarController.text) ?? 0;
+
+                            ref.read(panjangProvider.notifier).state = panjang;
+                            ref.read(lebarProvider.notifier).state = lebar;
+
                             ref.read(kelilingPersegiPanjangProvider.notifier).state =
                                 2 * (panjang + lebar);
                           }
@@ -116,7 +120,7 @@ class _KelilingBangunDatarState extends State<KelilingBangunDatar> {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      CalculateButton(
+                      MainButton(
                         icon: Icon(Icons.square),
                         textButton: "Hitung Keliling Persegi",
                         backgroundColor: Colors.blueAccent,
@@ -131,6 +135,9 @@ class _KelilingBangunDatarState extends State<KelilingBangunDatar> {
                             ScaffoldMessenger.of(context).showSnackBar(snackBar);
                           } else {
                             final sisi = double.tryParse(sisiController.text) ?? 0;
+
+                            ref.read(sisiProvider.notifier).state = sisi;
+
                             ref.read(kelilingPersegiProvider.notifier).state =
                                 4 * sisi;
                           }
@@ -164,7 +171,7 @@ class _KelilingBangunDatarState extends State<KelilingBangunDatar> {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      CalculateButton(
+                      MainButton(
                         icon: Icon(Icons.circle_rounded),
                         textButton: "Hitung Keliling Lingkaran",
                         backgroundColor: Colors.blueAccent,
@@ -179,6 +186,8 @@ class _KelilingBangunDatarState extends State<KelilingBangunDatar> {
                             ScaffoldMessenger.of(context).showSnackBar(snackBar);
                           } else {
                             final jariJari = double.tryParse(jariJariController.text) ?? 0;
+                            ref.read(jariJariProvider.notifier).state = jariJari;
+
                             ref.read(kelilingLingkaranProvider.notifier).state =
                                 2 * 3.14 * jariJari;
                           }

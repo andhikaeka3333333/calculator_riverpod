@@ -8,3 +8,4 @@ class ModelDashboard {
 
   ModelDashboard(this.title, this.image, this.icon, this.route);
 }
+

@@ -1,6 +1,7 @@
+import 'package:calculator_riverpod/screens/keliling_bangun_datar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../widgets/calculate_button.dart';
+import '../widgets/main_button.dart';
 import '../widgets/custom_input.dart';
 
 // Provider declarations
@@ -79,7 +80,7 @@ class _LuasPermukaanBangunRuangState extends State<LuasPermukaanBangunRuang> {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      CalculateButton(
+                      MainButton(
                         textButton: "Hitung Luas Permukaan Balok",
                         backgroundColor: Colors.blueAccent,
                         textColor: Colors.white,
@@ -97,6 +98,10 @@ class _LuasPermukaanBangunRuangState extends State<LuasPermukaanBangunRuang> {
                             final panjang = double.tryParse(panjangBalokController.text) ?? 0;
                             final lebar = double.tryParse(lebarBalokController.text) ?? 0;
                             final tinggi = double.tryParse(tinggiBalokController.text) ?? 0;
+
+                            ref.read(panjangBalokProvider.notifier).state = panjang;
+                            ref.read(lebarBalokProvider.notifier).state = lebar;
+                            ref.read(tinggiBalokProvider.notifier).state = tinggi;
 
                             ref.read(luasPermukaanBalokProvider.notifier).state =
                                 2 * ((panjang * lebar) + (panjang * tinggi) + (lebar * tinggi));
@@ -135,7 +140,7 @@ class _LuasPermukaanBangunRuangState extends State<LuasPermukaanBangunRuang> {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      CalculateButton(
+                      MainButton(
                         textButton: "Hitung Luas Permukaan Kubus",
                         backgroundColor: Colors.blueAccent,
                         textColor: Colors.white,
@@ -149,6 +154,8 @@ class _LuasPermukaanBangunRuangState extends State<LuasPermukaanBangunRuang> {
                             ScaffoldMessenger.of(context).showSnackBar(snackBar);
                           } else {
                             final rusuk = double.tryParse(rusukKubusController.text) ?? 0;
+
+                            ref.read(rusukKubusProvider.notifier).state = rusuk;
 
                             ref.read(luasPermukaanKubusProvider.notifier).state =
                                 6 * rusuk * rusuk;
@@ -187,7 +194,7 @@ class _LuasPermukaanBangunRuangState extends State<LuasPermukaanBangunRuang> {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      CalculateButton(
+                      MainButton(
                         textButton: "Hitung Luas Permukaan Bola",
                         backgroundColor: Colors.blueAccent,
                         textColor: Colors.white,
@@ -201,6 +208,8 @@ class _LuasPermukaanBangunRuangState extends State<LuasPermukaanBangunRuang> {
                             ScaffoldMessenger.of(context).showSnackBar(snackBar);
                           } else {
                             final jariJari = double.tryParse(jariJariBolaController.text) ?? 0;
+
+                            ref.read(jariJariBolaProvider.notifier).state = jariJari;
 
                             ref.read(luasPermukaanBolaProvider.notifier).state =
                                 4 * 3.14 * jariJari * jariJari;

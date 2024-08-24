@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../widgets/calculate_button.dart';
+import '../widgets/main_button.dart';
 import '../widgets/custom_input.dart';
 
 final bilanganPokokProvider = StateProvider<double>((ref) => 0);
@@ -50,7 +50,7 @@ class _PerpangkatanState extends State<Perpangkatan> {
             const SizedBox(height: 10),
             Consumer(
               builder: (context, ref, _) {
-                return CalculateButton(
+                return MainButton(
                   textButton: "Hitung",
                   backgroundColor: Colors.blueAccent,
                   textColor: Colors.white,
@@ -74,6 +74,8 @@ class _PerpangkatanState extends State<Perpangkatan> {
                       for (int i = 0; i < bilanganPangkat; i++) {
                         hasil *= bilanganPokok;
                       }
+                      ref.read(bilanganPangkatProvider.notifier).state = bilanganPangkat;
+                      ref.read(bilanganPokokProvider.notifier).state = bilanganPokok;
 
                       ref.read(hasilPerpangkatanProvider.notifier).state =
                           hasil;

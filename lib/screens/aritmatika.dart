@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../widgets/calculate_button.dart';
+import '../../widgets/main_button.dart';
 import '../../widgets/custom_input.dart';
 
-final angka1Provider = StateProvider<double>((ref) => 0);
-final angka2Provider = StateProvider<double>((ref) => 0);
+final number1Provider = StateProvider<double>((ref) => 0);
+final number2Provider = StateProvider<double>((ref) => 0);
 final operationProvider = StateProvider<String>((ref) => 'Penjumlahan');
-
 final resultProvider = StateProvider<double>((ref) => 0);
 
 class Aritmatika extends ConsumerWidget {
@@ -15,8 +14,8 @@ class Aritmatika extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final angka1Controller = TextEditingController();
-    final angka2Controller = TextEditingController();
+    final number1Controller = TextEditingController();
+    final number2Controller = TextEditingController();
 
     return Scaffold(
       appBar: AppBar(
@@ -32,7 +31,7 @@ class Aritmatika extends ConsumerWidget {
               borderColor: Colors.black,
               focusedBorderColor: Colors.grey,
               inputType: TextInputType.number,
-              controller: angka1Controller,
+              controller: number1Controller,
               labelColor: Colors.black,
             ),
             const SizedBox(height: 20),
@@ -41,7 +40,7 @@ class Aritmatika extends ConsumerWidget {
               borderColor: Colors.black,
               focusedBorderColor: Colors.grey,
               inputType: TextInputType.number,
-              controller: angka2Controller,
+              controller: number2Controller,
               labelColor: Colors.black,
             ),
             const SizedBox(height: 20),
@@ -71,24 +70,28 @@ class Aritmatika extends ConsumerWidget {
             const SizedBox(height: 20),
             Consumer(
               builder: (context, ref, _) {
-                return CalculateButton(
+                return MainButton(
                   textButton: "Hitung",
                   backgroundColor: Colors.blueAccent,
                   textColor: Colors.white,
                   radius: 5,
                   elevation: 5,
                   onPressed: () {
-                    if (angka1Controller.text.isEmpty ||
-                        angka2Controller.text.isEmpty) {
+                    if (number1Controller.text.isEmpty ||
+                        number2Controller.text.isEmpty) {
                       const snackBar = SnackBar(
                         content: Text('Inputan harus lengkap!'),
                       );
                       ScaffoldMessenger.of(context).showSnackBar(snackBar);
                     } else {
                       final number1 =
-                          double.tryParse(angka1Controller.text) ?? 0;
+                          double.tryParse(number1Controller.text) ?? 0;
                       final number2 =
-                          double.tryParse(angka2Controller.text) ?? 0;
+                          double.tryParse(number2Controller.text) ?? 0;
+
+
+                      ref.read(number1Provider.notifier).state = number1;
+                      ref.read(number2Provider.notifier).state = number2;
 
                       final selectedOperation = ref.watch(operationProvider);
 
