@@ -8,7 +8,8 @@ class CustomInput extends StatelessWidget {
   final Color labelColor;
   final Color focusedBorderColor;
   final TextInputType inputType;
-  final TextEditingController controller;
+  final TextEditingController? controller;
+  final void Function(String)? onChanged;
 
   const CustomInput({
     super.key,
@@ -16,30 +17,30 @@ class CustomInput extends StatelessWidget {
     required this.borderColor,
     required this.focusedBorderColor,
     required this.inputType,
-    required this.controller, required this.labelColor,
+    this.controller,
+    required this.labelColor,
+    this.onChanged,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextField(
-      controller: controller,
-      decoration: InputDecoration(
-        labelText: labelText,
-        labelStyle: TextStyle(
-          color: labelColor
+        controller: controller,
+        decoration: InputDecoration(
+          labelText: labelText,
+          labelStyle: TextStyle(color: labelColor),
+          border: OutlineInputBorder(),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: borderColor),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: focusedBorderColor),
+          ),
         ),
-        border: OutlineInputBorder(),
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: borderColor),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: focusedBorderColor),
-        ),
-      ),
-      keyboardType: inputType,
+        keyboardType: inputType,
         inputFormatters: <TextInputFormatter>[
           FilteringTextInputFormatter.digitsOnly,
-        ]
-    );
+        ],
+    onChanged: onChanged,);
   }
 }

@@ -1,19 +1,10 @@
 import 'package:calculator_riverpod/screens/keliling_bangun_datar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../logic/luas_permukaan_logic.dart';
 import '../widgets/main_button.dart';
 import '../widgets/custom_input.dart';
 
-// Provider declarations
-final rusukKubusProvider = StateProvider<double>((ref) => 0);
-final panjangBalokProvider = StateProvider<double>((ref) => 0);
-final lebarBalokProvider = StateProvider<double>((ref) => 0);
-final tinggiBalokProvider = StateProvider<double>((ref) => 0);
-final jariJariBolaProvider = StateProvider<double>((ref) => 0);
-
-final luasPermukaanKubusProvider = StateProvider<double>((ref) => 0);
-final luasPermukaanBalokProvider = StateProvider<double>((ref) => 0);
-final luasPermukaanBolaProvider = StateProvider<double>((ref) => 0);
 
 class LuasPermukaanBangunRuang extends StatefulWidget {
   const LuasPermukaanBangunRuang({super.key});
@@ -26,7 +17,6 @@ class _LuasPermukaanBangunRuangState extends State<LuasPermukaanBangunRuang> {
   final panjangBalokController = TextEditingController();
   final lebarBalokController = TextEditingController();
   final tinggiBalokController = TextEditingController();
-
   final rusukKubusController = TextEditingController();
   final jariJariBolaController = TextEditingController();
 
@@ -103,8 +93,7 @@ class _LuasPermukaanBangunRuangState extends State<LuasPermukaanBangunRuang> {
                             ref.read(lebarBalokProvider.notifier).state = lebar;
                             ref.read(tinggiBalokProvider.notifier).state = tinggi;
 
-                            ref.read(luasPermukaanBalokProvider.notifier).state =
-                                2 * ((panjang * lebar) + (panjang * tinggi) + (lebar * tinggi));
+                            ref.read(luasPermukaanBalokProvider.notifier).state;
                           }
                         },
                       ),
@@ -157,8 +146,7 @@ class _LuasPermukaanBangunRuangState extends State<LuasPermukaanBangunRuang> {
 
                             ref.read(rusukKubusProvider.notifier).state = rusuk;
 
-                            ref.read(luasPermukaanKubusProvider.notifier).state =
-                                6 * rusuk * rusuk;
+                            ref.read(luasPermukaanKubusProvider.notifier).state;
                           }
                         },
                       ),
@@ -211,8 +199,7 @@ class _LuasPermukaanBangunRuangState extends State<LuasPermukaanBangunRuang> {
 
                             ref.read(jariJariBolaProvider.notifier).state = jariJari;
 
-                            ref.read(luasPermukaanBolaProvider.notifier).state =
-                                4 * 3.14 * jariJari * jariJari;
+                            ref.read(luasPermukaanBolaProvider.notifier).state;
                           }
                         },
                       ),

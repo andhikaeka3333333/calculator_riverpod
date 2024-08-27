@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../logic/perpangkatan_logic.dart';
 import '../widgets/main_button.dart';
 import '../widgets/custom_input.dart';
 
-final bilanganPokokProvider = StateProvider<double>((ref) => 0);
-final bilanganPangkatProvider = StateProvider<double>((ref) => 0);
-final hasilPerpangkatanProvider = StateProvider<double>((ref) => 0);
+
 
 class Perpangkatan extends StatefulWidget {
   const Perpangkatan({super.key});
@@ -70,16 +69,11 @@ class _PerpangkatanState extends State<Perpangkatan> {
                             double.tryParse(bilanganPokokController.text) ?? 0;
                         final bilanganPangkat =
                             double.tryParse(bilanganPangkatController.text) ?? 0;
-        
-                        double hasil = 1;
-                        for (int i = 0; i < bilanganPangkat; i++) {
-                          hasil *= bilanganPokok;
-                        }
+
                         ref.read(bilanganPangkatProvider.notifier).state = bilanganPangkat;
                         ref.read(bilanganPokokProvider.notifier).state = bilanganPokok;
         
-                        ref.read(hasilPerpangkatanProvider.notifier).state =
-                            hasil;
+                        ref.read(hasilPerpangkatanProvider.notifier).state;
                       }
                     },
                   );

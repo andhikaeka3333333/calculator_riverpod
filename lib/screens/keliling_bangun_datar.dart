@@ -1,17 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../logic/keliling_logic.dart';
 import '../widgets/main_button.dart';
 import '../widgets/custom_input.dart';
 
 
-final panjangProvider = StateProvider<double>((ref) => 0);
-final lebarProvider = StateProvider<double>((ref) => 0);
-final sisiProvider = StateProvider<double>((ref) => 0);
-final jariJariProvider = StateProvider<double>((ref) => 0);
 
-final kelilingPersegiPanjangProvider = StateProvider<double>((ref) => 0);
-final kelilingPersegiProvider = StateProvider<double>((ref) => 0);
-final kelilingLingkaranProvider = StateProvider<double>((ref) => 0);
 
 class KelilingBangunDatar extends StatefulWidget {
   const KelilingBangunDatar({super.key});
@@ -87,8 +81,7 @@ class _KelilingBangunDatarState extends State<KelilingBangunDatar> {
                             ref.read(panjangProvider.notifier).state = panjang;
                             ref.read(lebarProvider.notifier).state = lebar;
 
-                            ref.read(kelilingPersegiPanjangProvider.notifier).state =
-                                2 * (panjang + lebar);
+                            ref.read(kelilingPersegiPanjangProvider.notifier).state;
                           }
                         },
                       ),
@@ -137,9 +130,7 @@ class _KelilingBangunDatarState extends State<KelilingBangunDatar> {
                             final sisi = double.tryParse(sisiController.text) ?? 0;
 
                             ref.read(sisiProvider.notifier).state = sisi;
-
-                            ref.read(kelilingPersegiProvider.notifier).state =
-                                4 * sisi;
+                            ref.read(kelilingPersegiProvider.notifier).state;
                           }
                         },
                       ),
@@ -188,8 +179,7 @@ class _KelilingBangunDatarState extends State<KelilingBangunDatar> {
                             final jariJari = double.tryParse(jariJariController.text) ?? 0;
                             ref.read(jariJariProvider.notifier).state = jariJari;
 
-                            ref.read(kelilingLingkaranProvider.notifier).state =
-                                2 * 3.14 * jariJari;
+                            ref.read(kelilingLingkaranProvider.notifier).state;
                           }
                         },
                       ),
