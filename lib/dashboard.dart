@@ -14,14 +14,10 @@ class Dashboard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     List<ModelDashboard> dataDashboard = [
-      ModelDashboard(
-          "Kalkulator Aritmatika", null, Icons.calculate, Aritmatika()),
-      ModelDashboard("Keliling Bangun Datar", null, Icons.circle_rounded,
-          KelilingBangunDatar()),
-      ModelDashboard("Keliling Bangun Ruang", "images/kubus.png", null,
-          LuasPermukaanBangunRuang()),
-      ModelDashboard("Bilangan Pangkat", "images/bilanganpangkat.png", null,
-          Perpangkatan()),
+      ModelDashboard("Kalkulator Aritmatika", null, Icons.calculate, '/aritmatika'),
+      ModelDashboard("Keliling Bangun Datar", null, Icons.circle_rounded, '/keliling-bangun-datar'),
+      ModelDashboard("Keliling Bangun Ruang", "images/kubus.png", null, '/luas-permukaan-bangun-ruang'),
+      ModelDashboard("Bilangan Pangkat", "images/bilanganpangkat.png", null, '/perpangkatan'),
     ];
 
     return Scaffold(
@@ -29,12 +25,14 @@ class Dashboard extends ConsumerWidget {
         title: Text("Dashboard Kalkulator"),
       ),
       body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: ListView.builder(
-              itemCount: dataDashboard.length,
-              itemBuilder: (context, index) {
-                return AdapterListDashboard(modelDashboard: dataDashboard[index]);
-              })),
+        padding: const EdgeInsets.all(8.0),
+        child: ListView.builder(
+          itemCount: dataDashboard.length,
+          itemBuilder: (context, index) {
+            return AdapterListDashboard(modelDashboard: dataDashboard[index]);
+          },
+        ),
+      ),
     );
   }
 }

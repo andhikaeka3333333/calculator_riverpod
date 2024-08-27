@@ -25,78 +25,80 @@ class _PerpangkatanState extends State<Perpangkatan> {
       appBar: AppBar(
         title: const Text("Perhitungan Bilangan Pangkat"),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            CustomInput(
-              labelText: "Bilangan Pokok",
-              borderColor: Colors.black,
-              focusedBorderColor: Colors.grey,
-              inputType: TextInputType.number,
-              controller: bilanganPokokController,
-              labelColor: Colors.black,
-            ),
-            const SizedBox(height: 20),
-            CustomInput(
-              labelText: "Bilangan Pangkat",
-              borderColor: Colors.black,
-              focusedBorderColor: Colors.grey,
-              inputType: TextInputType.number,
-              controller: bilanganPangkatController,
-              labelColor: Colors.black,
-            ),
-            const SizedBox(height: 10),
-            Consumer(
-              builder: (context, ref, _) {
-                return MainButton(
-                  textButton: "Hitung",
-                  backgroundColor: Colors.blueAccent,
-                  textColor: Colors.white,
-                  radius: 5,
-                  elevation: 5,
-                  onPressed: () {
-                    if (bilanganPangkatController.text.isEmpty ||
-                        bilanganPokokController.text.isEmpty) {
-                      const snackBar = SnackBar(
-                        content: Text('Inputan harus lengkap!'),
-                      );
-
-                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                    } else {
-                      final bilanganPokok =
-                          double.tryParse(bilanganPokokController.text) ?? 0;
-                      final bilanganPangkat =
-                          double.tryParse(bilanganPangkatController.text) ?? 0;
-
-                      double hasil = 1;
-                      for (int i = 0; i < bilanganPangkat; i++) {
-                        hasil *= bilanganPokok;
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              CustomInput(
+                labelText: "Bilangan Pokok",
+                borderColor: Colors.black,
+                focusedBorderColor: Colors.grey,
+                inputType: TextInputType.number,
+                controller: bilanganPokokController,
+                labelColor: Colors.black,
+              ),
+              const SizedBox(height: 20),
+              CustomInput(
+                labelText: "Bilangan Pangkat",
+                borderColor: Colors.black,
+                focusedBorderColor: Colors.grey,
+                inputType: TextInputType.number,
+                controller: bilanganPangkatController,
+                labelColor: Colors.black,
+              ),
+              const SizedBox(height: 10),
+              Consumer(
+                builder: (context, ref, _) {
+                  return MainButton(
+                    textButton: "Hitung",
+                    backgroundColor: Colors.blueAccent,
+                    textColor: Colors.white,
+                    radius: 5,
+                    elevation: 5,
+                    onPressed: () {
+                      if (bilanganPangkatController.text.isEmpty ||
+                          bilanganPokokController.text.isEmpty) {
+                        const snackBar = SnackBar(
+                          content: Text('Inputan harus lengkap!'),
+                        );
+        
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      } else {
+                        final bilanganPokok =
+                            double.tryParse(bilanganPokokController.text) ?? 0;
+                        final bilanganPangkat =
+                            double.tryParse(bilanganPangkatController.text) ?? 0;
+        
+                        double hasil = 1;
+                        for (int i = 0; i < bilanganPangkat; i++) {
+                          hasil *= bilanganPokok;
+                        }
+                        ref.read(bilanganPangkatProvider.notifier).state = bilanganPangkat;
+                        ref.read(bilanganPokokProvider.notifier).state = bilanganPokok;
+        
+                        ref.read(hasilPerpangkatanProvider.notifier).state =
+                            hasil;
                       }
-                      ref.read(bilanganPangkatProvider.notifier).state = bilanganPangkat;
-                      ref.read(bilanganPokokProvider.notifier).state = bilanganPokok;
-
-                      ref.read(hasilPerpangkatanProvider.notifier).state =
-                          hasil;
-                    }
-                  },
-                );
-              },
-            ),
-            const SizedBox(height: 20),
-            Consumer(
-              builder: (context, ref, _) {
-                final hasilPerpangkatan = ref.watch(hasilPerpangkatanProvider);
-                return Center(
-                  child: Text(
-                    'Hasil: $hasilPerpangkatan',
-                    style: const TextStyle(fontSize: 18),
-                  ),
-                );
-              },
-            ),
-          ],
+                    },
+                  );
+                },
+              ),
+              const SizedBox(height: 20),
+              Consumer(
+                builder: (context, ref, _) {
+                  final hasilPerpangkatan = ref.watch(hasilPerpangkatanProvider);
+                  return Center(
+                    child: Text(
+                      'Hasil: $hasilPerpangkatan',
+                      style: const TextStyle(fontSize: 18),
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../widgets/colors.dart';
 import '../model/model_dashboard.dart';
@@ -11,7 +12,8 @@ class AdapterListDashboard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ItemDashboard(title: modelDashboard.title,
+    return ItemDashboard(
+      title: modelDashboard.title,
       image: modelDashboard.image,
       iconData: modelDashboard.icon,
       iconColor: iconColor,
@@ -24,13 +26,9 @@ class AdapterListDashboard extends StatelessWidget {
       fontSize: 20,
       fontWeight: FontWeight.w500,
       onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => modelDashboard.route!));
-      }, marginTop: 20,);
+        context.push(modelDashboard.route); // Navigasi menggunakan GoRouter
+      },
+      marginTop: 20,
+    );
   }
 }
-
-
-
